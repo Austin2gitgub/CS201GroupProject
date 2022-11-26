@@ -46,7 +46,7 @@ public class Main {
             //Main Menu
             boolean mainMenuRepeatCheck = false;
             do {//Creating a Do while in-order to repeat 'do' when the input is not valid
-
+                mainMenuRepeatCheck = false;
                 //Getting input from the user for Main Menu
                 Scanner input = new Scanner(System.in);
                 System.out.println("\n" + "           Welcome to the product management dashboard\n");
@@ -61,22 +61,22 @@ public class Main {
                 if (inputAction.equals("1")) {
                     boolean addProductRepeatCheck = false;
                     do {//Creating a Do while in-order to repeat 'do' when the input is not valid
-
+                        addProductRepeatCheck = false;
                         //Getting the input from the user for adding the product
                         System.out.println("For 2 words or more give a '_' in between ex: Whole_Pepper");
                         System.out.println("What is the name?");
-                        String nameInput = input.next();
+                        String nameInput = input.next().toLowerCase();
                         input.nextLine();
                         System.out.println("What is the Category?");
-                        String categoryInput = input.next();
+                        String categoryInput = input.next().toLowerCase();
                         System.out.println("What is the Type?");
-                        String typeInput = input.next();
+                        String typeInput = input.next().toLowerCase();
                         System.out.println("What is the Price(ex: $0.50)?");
-                        String priceInput = input.next();
+                        String priceInput = input.next().toLowerCase();
                         System.out.println("What is the Expiration(in days)?");
-                        String expirationInput = input.next();
+                        String expirationInput = input.next().toLowerCase();
                         System.out.println("What is the Status(In-Store or Sold-Out)?");
-                        String statusInput = input.next();
+                        String statusInput = input.next().toLowerCase();
 
                         //Validation for null Input
                         if (nameInput.length() < 1 || categoryInput.length() < 1 || typeInput.length() < 1 || priceInput.length() < 1 || expirationInput.length() < 1 || statusInput.length() < 1) {
@@ -97,6 +97,7 @@ public class Main {
                             System.out.println("If you want to go to main menu, type 2");
                             boolean function1FinalDecisionRepeatCheck = false;
                             do {//Creating a Do while in-order to repeat 'do' when the input is not valid
+                                function1FinalDecisionRepeatCheck = false;
                                 String function1FinalDecision = input.next();
                                 if (function1FinalDecision.equals("1")) {//Condition for changing do while
                                     addProductRepeatCheck = true;
@@ -114,10 +115,46 @@ public class Main {
 
 
                 } else if (inputAction.equals("2")) {
-                    System.out.println(Arrays.deepToString(TwoDimdata).replace("], ", "]\n"));
-                    //SearchItemInList();
-                    //or
-                    //Fill code for that here
+                    boolean searchProductRepeatCheck = false;
+                    do {
+                        searchProductRepeatCheck = false;
+                        boolean foundCheck = false;
+                        System.out.println("For 2 words or more give a '_' in between ex: Whole_Pepper");
+                        System.out.println("What is the name of the product you want to search?");
+                        String productName = input.next();
+
+                        for (int i = 0; i < TwoDimdata.length - 1; i++) {
+                            if (TwoDimdata[i][0].equals(productName.toLowerCase())) {
+                                System.out.println(TwoDimdata[i][0] + ", " + TwoDimdata[i][1] + ", " + TwoDimdata[i][2] + ", " + TwoDimdata[i][3] + ", " + TwoDimdata[i][4] + ", " + TwoDimdata[i][5]);
+
+                            } else {
+                                foundCheck = true;
+                            }
+
+                        }
+                        if (foundCheck == true) {
+                            System.out.println("No product is found");
+                        } else {
+                        }
+
+                        System.out.println("If you want to search another product, type 1");
+                        System.out.println("If you want to go to main menu, type 2");
+                        boolean function2FinalDecisionRepeatCheck = false;
+                        do {//Creating a Do while in-order to repeat 'do' when the input is not valid
+                            function2FinalDecisionRepeatCheck = false;
+                            String function2FinalDecision = input.next();
+                            if (function2FinalDecision.equals("1")) {//Condition for changing do while
+                                searchProductRepeatCheck = true;
+                            } else if (function2FinalDecision.equals("2")) {//Condition for changing do while
+                                mainMenuRepeatCheck = true;
+                            } else {//Condition for changing do while
+                                function2FinalDecisionRepeatCheck = true;
+                                System.out.println("Wrong Input, please try again!");
+                            }
+                        }
+                        while (function2FinalDecisionRepeatCheck == true);
+                    }
+                    while(searchProductRepeatCheck == true);
                 } else if (inputAction.equals("3")) {
 
                     //SearchItemByCategoryInList();
@@ -125,7 +162,7 @@ public class Main {
                     //Fill code for that here
                 } else if (inputAction.equals("Exit") || inputAction.equals("exit")) {
                     mainMenuRepeatCheck =false;
-                    System.out.println("Thank you for using our dashboard");
+                    System.out.println("Thank you for using our product management system, have a great day ahead");
                 } else {
                     mainMenuRepeatCheck =true;
                     System.out.println("Wrong Input, please try again!");
